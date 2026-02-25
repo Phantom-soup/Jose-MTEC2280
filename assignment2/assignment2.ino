@@ -31,10 +31,10 @@ int ledLevel2 = 0;
 int ledLevel3 = 0;
 int ledLevel4 = 0;
 
-bool ledToggle1 = 0;
-bool ledToggle2 = 0;
-bool ledToggle3 = 0;
-bool ledToggle4 = 0;
+bool ledToggle1 = 1;
+bool ledToggle2 = 1;
+bool ledToggle3 = 1;
+bool ledToggle4 = 1;
 
 void setup() {
   pinMode(ledPin1, OUTPUT);
@@ -58,7 +58,7 @@ void loop() {
 
   if (buttonState1 && lastButtonState1)
   {
-    if (lightNumber > 4)
+    if (lightNumber > 3)
     {
       lightNumber = 1;
     }
@@ -79,6 +79,22 @@ void loop() {
 
   if (buttonState2 && lastButtonState2)
   {
+    if (lightNumber == 1)
+    {
+      ledToggle1 = !ledToggle1;
+    }
+    if (lightNumber == 2)
+    {
+      ledToggle2 = !ledToggle2;
+    }
+    if (lightNumber == 3)
+    {
+      ledToggle3 = !ledToggle3;
+    }
+    if (lightNumber == 4)
+    {
+      ledToggle4 = !ledToggle4;
+    }
     b2push = 1;
     toggle2 = !toggle2;
   }
@@ -91,27 +107,27 @@ void loop() {
 
   if (b1push && b2push)
   {
-    analogWrite(ledPin1, ledLevel1);
-    analogWrite(ledPin2, ledLevel2);
-    analogWrite(ledPin3, ledLevel3);
-    analogWrite(ledPin4, ledLevel4);
+    analogWrite(ledPin1, adcVal);
+    analogWrite(ledPin2, adcVal);
+    analogWrite(ledPin3, adcVal);
+    analogWrite(ledPin4, adcVal);
   }
   else if (lightNumber == 1)
   {
     ledLevel1 = adcVal;
-    analogWrite(ledPin1, ledLevel1);
+    analogWrite(ledPin1, adcVal);
   }
   else if (lightNumber == 2)
   {
-    analogWrite(ledPin2, ledLevel2);
+    analogWrite(ledPin2, adcVal);
   }
   else if (lightNumber == 3)
   {
-    analogWrite(ledPin3, ledLevel3);
+    analogWrite(ledPin3, adcVal);
   }
   else if (lightNumber == 4)
   {
-    analogWrite(ledPin4, ledLevel4);
+    analogWrite(ledPin4, adcVal);
   }
   
   if (!ledToggle1)
@@ -130,4 +146,5 @@ void loop() {
   {
     analogWrite(ledPin4, 0);
   }
+  Serial.println(lightNumber);
 }
