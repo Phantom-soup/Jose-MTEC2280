@@ -9,7 +9,7 @@ const int buzzer = 6;
 bool lastButtonState;
 bool onState = false;
 int lastTimeButtonStateChanged = 0;
-int debounceDuration = 50;
+int debounceDuration = 20;
 
 int value = 0;
 
@@ -42,7 +42,7 @@ void loop() {
   if(onState) {
     value = analogRead(potPin);
     int light = map(value, 0, 1023, 0, 255);
-    int buzzertime = map(value, 0, 1023, 0, 1023);
+    int buzzertime = map(value, 0, 1023, 0, 2000);
 
     analogWrite(ledPin,light);
     analogWrite(ledPin2,light);
