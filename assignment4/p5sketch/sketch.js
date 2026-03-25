@@ -49,8 +49,8 @@ function draw() //  draw function loops forever at frame rate
   background(backlight);
   button1 = sensors[0];
   button2 = sensors[1];
-  potVal = map(sensors[2], 0,1023, 0,100);
-  background(potVal,potVal,150+potVal,40);
+  potVal = map(sensors[2], 0,1023, 0,150);
+  background(potVal,potVal,100+potVal,60);
 
   if(sensors[0]){
     uno.show();
